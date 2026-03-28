@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CogniSalud - Atrofia Cognitiva</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#ec9a29',
+                            dark: '#d68820',
+                            light: '#fdf6ed'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection {
+            background-color: rgba(236, 154, 41, 0.2);
+            color: #d68820;
+        }
+        /* Transiciones suaves para el Quiz y Prompts */
+        .fade-enter {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .fade-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 300ms, transform 300ms;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white font-sans text-gray-900">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-brand p-2 rounded-lg">
+                        <i data-lucide="brain" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">CogniSalud</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#informacion" class="text-gray-600 hover:text-brand transition-colors font-medium">Información</a>
+                    <a href="#prompts" class="text-gray-600 hover:text-brand transition-colors font-medium">Prompts IA</a>
+                    <a href="#test" class="text-gray-600 hover:text-brand transition-colors font-medium">Test Interactivo</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <div class="bg-gradient-to-br from-white to-brand-light py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-6">
+                    Comprende y protege tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-dark">salud cognitiva</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
+                    La atrofia cognitiva afecta a millones de personas, pero el conocimiento y la estimulación mental pueden marcar la diferencia. Explora nuestra guía y evalúa tu agilidad mental.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#prompts" class="inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-full text-white bg-brand hover:bg-brand-dark transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        Potenciar mi Aprendizaje con IA
+                        <i data-lucide="sparkles" class="ml-2 w-5 h-5"></i>
+                    </a>
+                    <a href="#test" class="inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-full text-brand bg-white border border-brand/30 hover:bg-brand-light transition-all shadow-sm">
+                        Realizar Test Mental
+                        <i data-lucide="chevron-right" class="ml-2 w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información -->
+        <section id="informacion" class="py-20 bg-white px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Conociendo la Atrofia Cognitiva</h2>
+                    <div class="w-24 h-1 bg-brand mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12" id="info-container">
+                    <!-- Las tarjetas de información se generan vía JS para mantener el código limpio -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Generador de Prompts -->
+        <section id="prompts" class="py-20 bg-gray-50 px-4 sm:px-6 lg:px-8 border-y border-gray-100">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center justify-center p-2 bg-brand/10 rounded-full mb-4">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-brand"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Generador de Prompts Educativos</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Estimular la mente también implica saber usar las herramientas modernas. Selecciona un objetivo académico y copia un prompt optimizado para usar en tu Inteligencia Artificial favorita.
+                    </p>
+                    <div class="w-24 h-1 bg-brand mx-auto rounded-full mt-6"></div>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-8 bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                    <!-- Menú Izquierda -->
+                    <div class="lg:w-1/3 bg-gray-50/50 p-6 border-r border-gray-100">
+                        <h3 class="font-semibold text-gray-900 mb-4 px-2">Elige un objetivo:</h3>
+                        <div class="flex flex-col gap-2" id="prompt-menu">
+                            <!-- Botones generados vía JS -->
+                        </div>
+                    </div>
+
+                    <!-- Área de Visualización -->
+                    <div class="lg:w-2/3 p-6 lg:p-8 flex flex-col">
+                        <div class="mb-6">
+                            <h3 id="prompt-title-display" class="text-2xl font-bold text-gray-900 mb-2"></h3>
+                            <p id="prompt-desc-display" class="text-gray-600"></p>
+                        </div>
+
+                        <div class="relative flex-grow flex flex-col">
+                            <div id="prompt-text-display" class="bg-gray-900 rounded-2xl p-6 flex-grow font-mono text-sm leading-relaxed text-gray-300 whitespace-pre-wrap"></div>
+                            
+                            <div class="absolute top-4 right-4">
+                                <button id="copy-btn" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all bg-white/10 text-white hover:bg-white/20 border border-white/10">
+                                    <i data-lucide="copy" class="w-4 h-4 icon-normal"></i>
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 icon-success hidden text-emerald-400"></i>
+                                    <span id="copy-text">Copiar Prompt</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 flex items-center gap-2 text-sm text-gray-500 bg-blue-50/50 p-3 rounded-xl border border-blue-100">
+                            <i data-lucide="alert-circle" class="w-4 h-4 text-blue-500 flex-shrink-0"></i>
+                            <p>Reemplaza el texto en <strong class="text-blue-700">[CORCHETES]</strong> con tu propia información antes de enviarlo a la IA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Interactivo -->
+        <section id="test" class="py-20 bg-gray-900 text-white px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4">Test de Agilidad y Lógica</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        Este breve cuestionario está diseñado para evaluar tu atención al detalle, lógica matemática y pensamiento lateral. 
+                        <br/><span class="text-sm italic text-gray-500">*Nota: Esta es una herramienta educativa, no un diagnóstico médico.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 rounded-3xl p-6 md:p-10 shadow-2xl border border-gray-700 min-h-[400px] flex flex-col justify-center">
+                    
+                    <!-- Pantalla de Preguntas -->
+                    <div id="quiz-question-screen">
+                        <div class="flex justify-between items-center mb-8">
+                            <span id="quiz-progress-text" class="text-gray-400 font-medium"></span>
+                            <div id="quiz-progress-bars" class="flex gap-1"></div>
+                        </div>
+
+                        <h3 id="quiz-question-text" class="text-2xl md:text-3xl font-semibold mb-8 leading-tight"></h3>
+
+                        <div id="quiz-options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Opciones generadas vía JS -->
+                        </div>
+                    </div>
+
+                    <!-- Pantalla de Resultados -->
+                    <div id="quiz-result-screen" class="hidden text-center fade-enter">
+                        <div class="inline-flex items-center justify-center w-24 h-24 bg-gray-700 rounded-full mb-6 border-4 border-gray-600">
+                            <span id="quiz-final-score" class="text-3xl font-bold"></span>
+                        </div>
+                        <h3 id="quiz-result-title" class="text-2xl font-bold mb-4"></h3>
+                        <p id="quiz-result-text" class="text-gray-300 text-lg mb-8 max-w-lg mx-auto"></p>
+                        <button onclick="resetQuiz()" class="inline-flex items-center justify-center px-6 py-3 font-medium rounded-full text-white bg-brand hover:bg-brand-dark transition-colors">
+                            <i data-lucide="refresh-cw" class="mr-2 w-5 h-5"></i>
+                            Intentar de nuevo
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-400 py-12 px-4 sm:px-6 lg:px-8 border-t border-gray-900">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i data-lucide="brain" class="w-6 h-6 text-gray-500"></i>
+                <span class="font-semibold text-gray-300">CogniSalud</span>
+            </div>
+            <p class="text-sm text-center md:text-left max-w-2xl">
+                <strong>Aviso Médico:</strong> La información y las pruebas proporcionadas en este sitio web son únicamente para fines educativos e informativos. No sustituyen el consejo, diagnóstico o tratamiento médico profesional. Siempre busque el consejo de su médico u otro proveedor de salud calificado ante cualquier pregunta que pueda tener sobre una condición médica.
+            </p>
+            <div class="text-sm" id="year-display"></div>
+        </div>
+    </footer>
+
+    <!-- LOGICA JAVASCRIPT -->
+    <script>
+        // Inicializar año
+        document.getElementById('year-display').innerHTML = `&copy; ${new Date().getFullYear()} CogniSalud.`;
+
+        // --- DATOS ---
+        const infoSections = [
+            {
+                id: 'que-es',
+                title: '¿Qué es la Atrofia Cognitiva?',
+                icon: 'brain',
+                iconColor: 'text-brand',
+                content: `La atrofia cerebral o cognitiva es la pérdida de neuronas y de las conexiones entre ellas. Este proceso provoca una disminución en el tamaño del cerebro. Aunque un cierto grado de atrofia es natural con el envejecimiento, una pérdida acelerada puede estar asociada con enfermedades neurológicas y afectar significativamente la memoria, el pensamiento, la resolución de problemas y otras funciones cognitivas.`
+            },
+            {
+                id: 'causas',
+                title: 'Causas y Factores de Riesgo',
+                icon: 'activity',
+                iconColor: 'text-rose-600',
+                content: `Existen múltiples factores que pueden acelerar este proceso:<br>
+                • Enfermedades neurodegenerativas (como el Alzheimer o la enfermedad de Huntington).<br>
+                • Accidentes cerebrovasculares y daño cerebral traumático.<br>
+                • Infecciones graves que afectan el cerebro.<br>
+                • Factores de estilo de vida: sedentarismo, dieta pobre, consumo excesivo de alcohol y tabaquismo.<br>
+                • Condiciones médicas no controladas como hipertensión, diabetes o colesterol alto.`
+            },
+            {
+                id: 'sintomas',
+                title: 'Síntomas Principales',
+                icon: 'alert-circle',
+                iconColor: 'text-amber-600',
+                content: `Los síntomas varían dependiendo de la región del cerebro afectada, pero comúnmente incluyen:<br>
+                • Demencia: Pérdida de memoria severa y desorientación.<br>
+                • Convulsiones: Actividad eléctrica anormal en el cerebro.<br>
+                • Afasias: Dificultad para hablar, comprender el lenguaje, leer o escribir.<br>
+                • Dificultad en la resolución de problemas, planificación y ejecución de tareas cotidianas.`
+            },
+            {
+                id: 'prevencion',
+                title: 'Prevención y Neuroplasticidad',
+                icon: 'shield',
+                iconColor: 'text-emerald-600',
+                content: `El cerebro tiene la capacidad de adaptarse y crear nuevas conexiones (neuroplasticidad). Para proteger tu salud cognitiva:<br>
+                • Mantén una mente activa: Lee, aprende nuevos idiomas, toca instrumentos o resuelve acertijos.<br>
+                • Ejercicio físico regular: Mejora el flujo sanguíneo al cerebro.<br>
+                • Dieta saludable: Rica en Omega-3, antioxidantes (dieta mediterránea).<br>
+                • Vida social activa: Interactuar con otros estimula múltiples áreas cerebrales.<br>
+                • Control médico: Maneja la presión arterial, glucosa y colesterol.`
+            }
+        ];
+
+        const promptTemplates = [
+            {
+                id: 'feynman',
+                title: 'Técnica Feynman (Simplificar)',
+                icon: 'lightbulb',
+                description: 'Ideal para entender conceptos complejos desde cero.',
+                prompt: `Actúa como un profesor experto y paciente. Quiero que me expliques el concepto de [INSERTA TU TEMA AQUÍ] utilizando la Técnica Feynman. \n1. Explícalo primero como si tuviera 10 años, usando lenguaje muy sencillo y analogías de la vida cotidiana.\n2. Luego, profundiza un poco más detallando el funcionamiento técnico pero manteniendo la claridad.\n3. Finalmente, hazme 2 preguntas para comprobar si realmente he entendido la explicación. No me des las respuestas de inmediato.`
+            },
+            {
+                id: 'debate',
+                title: 'Oponente de Debate',
+                icon: 'message-square',
+                description: 'Desarrolla tu pensamiento crítico debatiendo ideas.',
+                prompt: `Actúa como un oponente de debate experto, respetuoso pero muy persuasivo. Voy a presentar un argumento sobre [INSERTA TU TEMA/POSTURA AQUÍ].\nTu objetivo es desafiar mi postura ofreciendo contraargumentos lógicos, basados en datos y evidencias. \nNo escribas un ensayo; responde a mi argumento directamente, punto por punto, y termina tu respuesta con una pregunta que me obligue a defender mi posición de manera más profunda. Empecemos, mi primer argumento es: [INSERTA TU ARGUMENTO].`
+            },
+            {
+                id: 'math',
+                title: 'Tutor Socrático (Ciencias)',
+                icon: 'calculator',
+                description: 'Aprende a resolver problemas sin que te den la respuesta final.',
+                prompt: `Actúa como un tutor de matemáticas y física utilizando el método socrático. Tengo el siguiente problema: [INSERTA EL PROBLEMA AQUÍ].\nBajo ninguna circunstancia me des la respuesta final ni resuelvas el problema completo de una vez. \nEn su lugar, hazme una pregunta guía para ayudarme a dar el primer paso por mí mismo. Si me equivoco, señálame amablemente el error y dame una pista para que yo mismo lo corrija. Solo avanzaremos al siguiente paso cuando yo haya resuelto el actual.`
+            },
+            {
+                id: 'summary',
+                title: 'Analista de Resúmenes',
+                icon: 'file-text',
+                description: 'Extrae lo más importante de textos largos para estudiar.',
+                prompt: `A continuación te proporcionaré un texto largo. Quiero que actúes como un analista experto en extracción de información y hagas lo siguiente:\n1. Crea un resumen ejecutivo de máximo 3 párrafos.\n2. Extrae las 5 ideas principales en formato de viñetas (bullet points).\n3. Identifica y define brevemente los 3 conceptos o palabras clave más importantes del texto.\n4. Genera una tabla comparativa si el texto contrasta dos o más ideas (si aplica).\nAquí está el texto: [INSERTA TU TEXTO AQUÍ]`
+            },
+            {
+                id: 'language',
+                title: 'Compañero de Idiomas',
+                icon: 'languages',
+                description: 'Practica un idioma con correcciones en tiempo real.',
+                prompt: `Actúa como un hablante nativo y profesor de [INSERTA EL IDIOMA QUE ESTUDIAS]. Vamos a tener una conversación casual sobre [INSERTA UN TEMA, EJ. VIAJES, COMIDA, TRABAJO].\nPor favor, sigue estas reglas estrictamente:\n1. Yo escribiré en [IDIOMA] y tú me responderás en el mismo idioma.\n2. Si cometo un error gramatical, de vocabulario o de naturalidad, corrige mi error amablemente en español antes de continuar con la conversación.\n3. Mantén tus respuestas relativamente cortas y termina siempre con una pregunta para mantener viva la conversación. ¡Hola!`
+            }
+        ];
+
+        const quizQuestions = [
+            { question: "Si miras en un espejo y ves un reloj analógico marcando las 3:15, ¿qué hora es en realidad?", options: ["8:45", "9:45", "3:15", "2:45"], correctAnswer: "8:45" },
+            { question: "¿Qué número sigue en la secuencia: 2, 6, 12, 20, 30, ...?", options: ["40", "42", "38", "44"], correctAnswer: "42" },
+            { question: "Un tren eléctrico viaja hacia el norte a 100 km/h y el viento sopla hacia el oeste a 10 km/h. ¿Hacia dónde va el humo?", options: ["Hacia el Este", "Hacia el Sur", "Hacia el Noroeste", "No echa humo"], correctAnswer: "No echa humo" },
+            { question: "Si la palabra 'GATO' se cifra como 'HCUP' (avanzando una letra), ¿cómo se cifraría 'LUNA'?", options: ["MVOB", "MVOZ", "NVOB", "MUOB"], correctAnswer: "MVOB" },
+            { question: "Tienes 3 cajas con etiquetas incorrectas: Manzanas, Naranjas, Ambas. Sacas una manzana de 'Ambas'. ¿Qué hay en 'Naranjas'?", options: ["Naranjas", "Manzanas", "Ambas", "No se puede saber"], correctAnswer: "Ambas" }
+        ];
+
+        // --- RENDERIZADO DE INFORMACIÓN ---
+        const infoContainer = document.getElementById('info-container');
+        infoSections.forEach(section => {
+            infoContainer.innerHTML += `
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 bg-white rounded-xl shadow-sm border border-gray-100">
+                            <i data-lucide="${section.icon}" class="w-6 h-6 ${section.iconColor}"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">${section.title}</h3>
+                    </div>
+                    <div class="text-gray-600 leading-relaxed">
+                        ${section.content}
+                    </div>
+                </div>
+            `;
+        });
+
+        // --- LOGICA GENERADOR DE PROMPTS ---
+        let activePromptId = promptTemplates[0].id;
+
+        function renderPromptsMenu() {
+            const menuContainer = document.getElementById('prompt-menu');
+            menuContainer.innerHTML = '';
+            
+            promptTemplates.forEach(template => {
+                const isActive = activePromptId === template.id;
+                const baseClasses = "flex items-start text-left p-4 rounded-xl transition-all cursor-pointer w-full text-left";
+                const activeClasses = isActive 
+                    ? "bg-white shadow-sm border border-brand/30 ring-1 ring-brand/30 relative" 
+                    : "hover:bg-gray-100 border border-transparent text-gray-600";
+                const iconColor = isActive ? "text-brand" : "text-gray-400";
+                const titleColor = isActive ? "text-gray-900" : "text-gray-700";
+                
+                const activeIndicator = isActive ? `<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-brand rounded-r-full"></div>` : '';
+
+                menuContainer.innerHTML += `
+                    <button onclick="selectPrompt('${template.id}')" class="${baseClasses} ${activeClasses}">
+                        ${activeIndicator}
+                        <div class="mt-0.5 mr-3 ${iconColor}">
+                            <i data-lucide="${template.icon}" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium ${titleColor}">${template.title}</div>
+                            <div class="text-sm text-gray-500 mt-1 line-clamp-2">${template.description}</div>
+                        </div>
+                    </button>
+                `;
+            });
+            lucide.createIcons();
+            updatePromptDisplay();
+        }
+
+        function selectPrompt(id) {
+            activePromptId = id;
+            renderPromptsMenu();
+        }
+
+        function updatePromptDisplay() {
+            const template = promptTemplates.find(p => p.id === activePromptId);
+            document.getElementById('prompt-title-display').innerText = template.title;
+            document.getElementById('prompt-desc-display').innerText = template.description;
+            document.getElementById('prompt-text-display').innerText = template.prompt;
+        }
+
+        // Copiar Portapapeles
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            const template = promptTemplates.find(p => p.id === activePromptId);
+            
+            // Método seguro para iframes
+            const textArea = document.createElement("textarea");
+            textArea.value = template.prompt;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                
+                // Cambios visuales botón
+                const btn = document.getElementById('copy-btn');
+                const text = document.getElementById('copy-text');
+                const iconNormal = btn.querySelector('.icon-normal');
+                const iconSuccess = btn.querySelector('.icon-success');
+
+                btn.classList.replace('bg-white/10', 'bg-emerald-500/20');
+                btn.classList.replace('border-white/10', 'border-emerald-500/30');
+                btn.classList.replace('text-white', 'text-emerald-400');
+                
+                iconNormal.classList.add('hidden');
+                iconSuccess.classList.remove('hidden');
+                text.innerText = '¡Copiado!';
+
+                setTimeout(() => {
+                    btn.classList.replace('bg-emerald-500/20', 'bg-white/10');
+                    btn.classList.replace('border-emerald-500/30', 'border-white/10');
+                    btn.classList.replace('text-emerald-400', 'text-white');
+                    iconNormal.classList.remove('hidden');
+                    iconSuccess.classList.add('hidden');
+                    text.innerText = 'Copiar Prompt';
+                }, 2000);
+
+            } catch (err) {
+                console.error('Error al copiar', err);
+            }
+            document.body.removeChild(textArea);
+        });
+
+        // --- LÓGICA DEL QUIZ ---
+        let currentQuestion = 0;
+        let score = 0;
+        let isAnswering = false;
+
+        function renderQuiz() {
+            const questionData = quizQuestions[currentQuestion];
+            
+            // Textos y Progreso
+            document.getElementById('quiz-progress-text').innerText = `Pregunta ${currentQuestion + 1} de ${quizQuestions.length}`;
+            document.getElementById('quiz-question-text').innerText = questionData.question;
+            
+            // Barras progreso
+            let barsHtml = '';
+            for(let i=0; i<quizQuestions.length; i++) {
+                barsHtml += `<div class="h-2 w-8 rounded-full ${i <= currentQuestion ? 'bg-brand' : 'bg-gray-700'}"></div>`;
+            }
+            document.getElementById('quiz-progress-bars').innerHTML = barsHtml;
+
+            // Opciones
+            const optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = '';
+            
+            questionData.options.forEach(option => {
+                optionsContainer.innerHTML += `
+                    <button onclick="handleAnswer('${option}', this)" class="quiz-option-btn relative flex items-center justify-between p-4 rounded-xl border-2 border-transparent transition-all duration-200 text-left text-lg font-medium w-full bg-gray-700 hover:bg-gray-600 text-gray-100">
+                        <span>${option}</span>
+                        <i data-lucide="check-circle-2" class="w-6 h-6 text-emerald-500 hidden correct-icon"></i>
+                    </button>
+                `;
+            });
+            lucide.createIcons();
+            
+            // Animar entrada
+            document.getElementById('quiz-question-screen').classList.add('fade-enter-active');
+            setTimeout(() => { document.getElementById('quiz-question-screen').classList.remove('fade-enter-active'); }, 300);
+        }
+
+        function handleAnswer(selectedOption, buttonElement) {
+            if (isAnswering) return;
+            isAnswering = true;
+
+            const questionData = quizQuestions[currentQuestion];
+            const isCorrect = selectedOption === questionData.correctAnswer;
+            
+            if (isCorrect) score++;
+
+            // Estilos de botones al responder
+            const allButtons = document.querySelectorAll('.quiz-option-btn');
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                const optionText = btn.querySelector('span').innerText;
+                
+                if (optionText === questionData.correctAnswer) {
+                    btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                    btn.classList.add('bg-emerald-600/20', 'border-emerald-500', 'text-emerald-400');
+                    btn.querySelector('.correct-icon').classList.remove('hidden');
+                } else if (optionText === selectedOption && !isCorrect) {
+                    btn.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                    btn.classList.add('bg-rose-600/20', 'border-rose-500', 'text-rose-400');
+                }
+            });
+
+            // Siguiente pregunta o resultados
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizQuestions.length) {
+                    isAnswering = false;
+                    renderQuiz();
+                } else {
+                    showResults();
+                }
+            }, 1500);
+        }
+
+        function showResults() {
+            document.getElementById('quiz-question-screen').classList.add('hidden');
+            const resultScreen = document.getElementById('quiz-result-screen');
+            resultScreen.classList.remove('hidden');
+            resultScreen.classList.add('fade-enter-active');
+
+            document.getElementById('quiz-final-score').innerText = `${score}/${quizQuestions.length}`;
+            
+            const percentage = (score / quizQuestions.length) * 100;
+            let title = "", text = "", colorClass = "";
+
+            if (percentage === 100) {
+                title = "¡Excelente!";
+                text = "Tu agilidad mental y capacidad de resolución de problemas lógicos están en un nivel óptimo. ¡Sigue estimulando tu mente!";
+                colorClass = "text-emerald-600";
+            } else if (percentage >= 60) {
+                title = "¡Muy bien!";
+                text = "Tienes un buen nivel de razonamiento. Algunos detalles se escaparon, pero tu funcionamiento cognitivo es sólido.";
+                colorClass = "text-brand";
+            } else {
+                title = "Sigue practicando";
+                text = "Este test incluía preguntas con trucos lógicos que requieren atención profunda. Considera integrar más ejercicios de estimulación cognitiva en tu rutina diaria.";
+                colorClass = "text-amber-600";
+            }
+
+            const titleEl = document.getElementById('quiz-result-title');
+            titleEl.innerText = title;
+            titleEl.className = `text-2xl font-bold mb-4 ${colorClass}`;
+            document.getElementById('quiz-result-text').innerText = text;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            isAnswering = false;
+            document.getElementById('quiz-result-screen').classList.add('hidden');
+            document.getElementById('quiz-question-screen').classList.remove('hidden');
+            renderQuiz();
+        }
+
+        // Inicializar vistas e íconos al cargar
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            renderPromptsMenu();
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
